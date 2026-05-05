@@ -24,5 +24,34 @@ graph={
 }
 
 bfs(graph,'A')
+ //Recursive style
+from collections import deque
+
+def bfs_recursive(queue, visited, graph):
+    if not queue:
+        return
+    
+    node = queue.popleft()
+    print(node, end=" ")
+    
+    for neighbor in graph[node]:
+        if neighbor not in visited:
+            visited.add(neighbor)
+            queue.append(neighbor)
+    
+    bfs_recursive(queue, visited, graph)
+
+
+graph = {
+    'A': ['B', 'C'],
+    'B': ['A', 'D'],
+    'C': ['A', 'D'],
+    'D': ['B', 'C']
+}
+
+visited = set(['A'])
+queue = deque(['A'])
+
+bfs_recursive(queue, visited, graph)
 
 
